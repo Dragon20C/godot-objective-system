@@ -8,6 +8,9 @@ extends Node
 var system = Objective_System.new()
 
 func _ready():
+	# Connect the system signal to the hud so we can receive the name and discription
+	# of the objective.
+	system.objective_started.connect(hud.set_objective_info)
 	# Have a setup function to config each objective
 	setup()
 

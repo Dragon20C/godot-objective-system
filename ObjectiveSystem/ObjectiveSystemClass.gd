@@ -1,6 +1,6 @@
 class_name Objective_System extends Node
 
-signal objective_started
+signal objective_started(_name,_discription)
 signal objective_completed
 
 
@@ -20,7 +20,7 @@ func update() -> void:
 	match current_objective.Status:
 		
 		States.NotRunning:
-			emit_signal("objective_started")
+			emit_signal("objective_started",current_objective.Name,current_objective.Discription)
 			current_objective.start_objective()
 			current_objective.Status = States.Running
 			
