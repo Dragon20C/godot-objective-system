@@ -1,8 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://co3qit0sxyt1x"]
+[gd_scene load_steps=21 format=3 uid="uid://co3qit0sxyt1x"]
 
 [ext_resource type="PackedScene" uid="uid://c3pyw0uukr03v" path="res://Scenes/player.tscn" id="1_kqipt"]
 [ext_resource type="Script" path="res://ObjectiveSystem/ObjectiveSystemManager.gd" id="2_v6vbf"]
 [ext_resource type="PackedScene" uid="uid://byc88rear0rm0" path="res://Scenes/objective_hud.tscn" id="3_usw6a"]
+[ext_resource type="PackedScene" uid="uid://burlpsuaxubai" path="res://Interactables/collectable_object.tscn" id="5_fmftx"]
+[ext_resource type="Script" path="res://Scripts/UI.gd" id="6_oed0k"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_g8hms"]
 sky_top_color = Color(0.454902, 0.745098, 0.976471, 1)
@@ -52,6 +54,12 @@ albedo_color = Color(0.898039, 0, 0, 1)
 material = SubResource("StandardMaterial3D_om6rc")
 size = Vector3(3, 0.5, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_dxm70"]
+size = Vector3(0.5, 3, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_g5gng"]
+data = PackedVector3Array(-0.25, 1.5, 10, 0.25, 1.5, 10, -0.25, -1.5, 10, 0.25, 1.5, 10, 0.25, -1.5, 10, -0.25, -1.5, 10, 0.25, 1.5, -10, -0.25, 1.5, -10, 0.25, -1.5, -10, -0.25, 1.5, -10, -0.25, -1.5, -10, 0.25, -1.5, -10, 0.25, 1.5, 10, 0.25, 1.5, -10, 0.25, -1.5, 10, 0.25, 1.5, -10, 0.25, -1.5, -10, 0.25, -1.5, 10, -0.25, 1.5, -10, -0.25, 1.5, 10, -0.25, -1.5, -10, -0.25, 1.5, 10, -0.25, -1.5, 10, -0.25, -1.5, -10, 0.25, 1.5, 10, -0.25, 1.5, 10, 0.25, 1.5, -10, -0.25, 1.5, 10, -0.25, 1.5, -10, 0.25, 1.5, -10, -0.25, -1.5, 10, 0.25, -1.5, 10, -0.25, -1.5, -10, 0.25, -1.5, 10, 0.25, -1.5, -10, -0.25, -1.5, -10)
+
 [node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -72,9 +80,10 @@ shape = SubResource("ConcavePolygonShape3D_04ms0")
 [node name="Player" parent="." instance=ExtResource("1_kqipt")]
 sensitivity = 0.002
 
-[node name="ObjectiveSystemManager" type="Node" parent="." node_paths=PackedStringArray("hud")]
+[node name="ObjectiveSystemManager" type="Node" parent="." node_paths=PackedStringArray("hud", "ui_node")]
 script = ExtResource("2_v6vbf")
 hud = NodePath("ObjectiveHud")
+ui_node = NodePath("../UI")
 
 [node name="ObjectiveHud" parent="ObjectiveSystemManager" instance=ExtResource("3_usw6a")]
 
@@ -107,3 +116,48 @@ shape = SubResource("BoxShape3D_wk7sy")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RedArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 mesh = SubResource("BoxMesh_x1k17")
+
+[node name="Wall" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1.54991, 0)
+mesh = SubResource("BoxMesh_dxm70")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Wall"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_g5gng")
+
+[node name="Collectables" type="Node" parent="." groups=["ObjectiveGroup"]]
+
+[node name="Collectable_object" parent="Collectables" instance=ExtResource("5_fmftx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.67927, 2, 0)
+
+[node name="Collectable_object2" parent="Collectables" instance=ExtResource("5_fmftx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.67927, 2, 2)
+
+[node name="Collectable_object3" parent="Collectables" instance=ExtResource("5_fmftx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.67927, 2, 4)
+
+[node name="Collectable_object4" parent="Collectables" instance=ExtResource("5_fmftx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.67927, 2, 6)
+
+[node name="Collectable_object5" parent="Collectables" instance=ExtResource("5_fmftx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.67927, 2, -2)
+
+[node name="Collectable_object6" parent="Collectables" instance=ExtResource("5_fmftx")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8.67927, 2, -4)
+
+[node name="UI" type="Node" parent="."]
+script = ExtResource("6_oed0k")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UI"]
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Prompt_label" type="Label" parent="UI/CanvasLayer/CenterContainer"]
+layout_mode = 2
+text = "Interacting with..."

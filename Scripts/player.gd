@@ -1,8 +1,8 @@
 class_name Player extends CharacterBody3D
 
-@export var sensitivity = 0.004
-
-var speed
+@export var sensitivity : float = 0.004
+@onready var raycast : RayCast3D = get_node("Head/Camera3D/RayCast3D")
+var speed : float
 const WALK_SPEED = 4.0
 const SPRINT_SPEED = 5.5
 const JUMP_VELOCITY = 4.8

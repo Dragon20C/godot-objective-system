@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://burlpsuaxubai"]
+
+[ext_resource type="Script" path="res://Interactables/collectable_object.gd" id="1_l6rxt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gkb3w"]
+albedo_color = Color(0.34902, 0.427451, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ghiie"]
+material = SubResource("StandardMaterial3D_gkb3w")
+size = Vector3(0.6, 1, 0.05)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_o646w"]
+size = Vector3(0.65, 1, 0.2)
+
+[node name="Collectable_object" type="Area3D"]
+script = ExtResource("1_l6rxt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ghiie")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0736043)
+shape = SubResource("BoxShape3D_o646w")

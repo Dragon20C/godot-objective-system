@@ -2,8 +2,8 @@ class_name Objective_Location extends Objective
 
 var Area : Area3D
 var in_area : bool = false
-func set_variables(_area : Area3D):
-	
+
+func set_area(_area : Area3D):
 	Area = _area
 
 func start_objective():
