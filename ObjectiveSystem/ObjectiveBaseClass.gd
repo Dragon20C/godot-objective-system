@@ -1,15 +1,14 @@
 class_name Objective extends Node
 
-signal interacted
+var system : Objective_System
 enum States {Running,NotRunning,Completed,Done}
 var Name: String
-var Discription: String
+var Description: String
 var Status : int = States.NotRunning
 # Called when the node enters the scene tree for the first time.
 
-func _init(_Name : String, _Discription : String) -> void:
-	Name = _Name
-	Discription = _Discription
+func _init(_name) -> void:
+	Name = _name
 
 func start_objective():
 	# Set inital variables like setting text to a objective ui element

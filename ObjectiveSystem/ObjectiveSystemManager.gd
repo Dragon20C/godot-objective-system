@@ -11,7 +11,9 @@ var system = Objective_System.new()
 func _ready():
 	# Connect the system signal to the hud so we can receive the name and discription
 	# of the objective.
-	system.objective_started.connect(hud.set_objective_info)
+	system.update_title.connect(hud.set_name_text)
+	system.update_description.connect(hud.set_description_text)
+	#system.objective_started.connect(hud.set_objective_info)
 	# Have a setup function to config each objective
 	setup()
 
@@ -24,10 +26,10 @@ func _physics_process(delta: float) -> void:
 
 func setup():
 	# Init the objectives here
-	var objective_1 = Objective_Location.new("Find the pink area!","The pink area ooooh.")
-	var objective_2 = Objective_Location.new("Find the green area!","green as grass.")
-	var objective_3 = Objective_Location.new("Find the red area!","burn baby burn!.")
-	var objective_4 = Objective_Collect.new("Collect paper","Just like slenderman!")
+	var objective_1 = Objective_Location.new("Find the pink area!")
+	var objective_2 = Objective_Location.new("Find the green area!")
+	var objective_3 = Objective_Location.new("Find the red area!")
+	var objective_4 = Objective_Collect.new("Collect paper")
 	# Set any variables to the objective
 	for objective_node in get_tree().get_nodes_in_group('ObjectiveGroup'):	
 		match objective_node.name:

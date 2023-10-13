@@ -2,28 +2,36 @@ class_name Objective_Collect extends Objective
 
 signal collected_object
 
-@export var total_collectable : int = 0
+var total_collectable : int = 0
 var collected_collectables : int = 0
-
-func _init(_Name : String, _Discription : String) -> void:
-	Name = _Name
-	Discription = _Discription
+var text_description = "Empty"
+var total_objects : int
+var objects : Node
 
 func set_collectables(colletables : Node):
-	var children = colletables.get_children()
+	# Get the objects
+	objects = colletables
+	total_objects = objects.get_children().size()
+	total_collectable = total_objects
+	text_description = "Collect " + str(total_collectable) + " objects, You have found " + str(collected_collectables)
 	
-	for i in children:
-		print(i.name)
-
 func start_objective():
 	print("Collecting objectes started!")
+	system.emit_signal("update_title",Name)
+	system.emit_signal("update_description",text_description)
+
 
 func check_objective() -> States:
-	# have logic for checking to see if the player has completed its objective
-	# example for when the player has reached a location
+	if total_objects > objects.get_children().size():
+		collected_collectables += 1
+		total_objects -= 1
+		print("Collected somethingw")
+		text_description = "Collect " + str(total_collectable) + " objects, You have found " + str(collected_collectables)
+		system.emit_signal("update_description",text_description)
+	elif total_objects == 0:
+		return States.Completed
+		
 	return States.Running
 
 func completed_objective():
-	# Have it run this when objective is done this can be used to give rewards
-	# or to display some text for the player
-	pass
+	print("Objective complete for collecting items")

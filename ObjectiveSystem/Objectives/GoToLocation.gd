@@ -8,8 +8,7 @@ func set_area(_area : Area3D):
 
 func start_objective():
 	Area.body_entered.connect(entered)
-	print(Name)
-	print(Discription)
+	system.emit_signal("update_description","This is a description text...")
 
 func check_objective() -> States:
 	if in_area:

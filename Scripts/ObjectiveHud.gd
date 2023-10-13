@@ -13,6 +13,8 @@ func _process(delta: float) -> void:
 	else:
 		self.visible = false
 
-func set_objective_info(_name,_discription):
-	name_node.text = _name
-	discription_node.text = _discription
+func set_name_text(text):
+	name_node.text = text
+
+func set_description_text(text):
+	discription_node.text = text

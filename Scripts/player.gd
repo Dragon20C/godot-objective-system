@@ -83,8 +83,8 @@ func _physics_process(delta):
 	
 	
 	# Head bob
-	t_bob += delta * velocity.length() * float(is_on_floor())
-	camera.transform.origin = _headbob(t_bob)
+	#t_bob += delta * velocity.length() * float(is_on_floor())
+	#camera.transform.origin = _headbob(t_bob)
 	
 	# FOV
 	#var velocity_clamped = clamp(velocity.length(), 0.5, SPRINT_SPEED * 2)

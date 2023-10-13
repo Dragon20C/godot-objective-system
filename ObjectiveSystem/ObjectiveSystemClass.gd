@@ -1,8 +1,12 @@
 class_name Objective_System extends Node
 
-signal objective_started(_name,_discription)
-signal objective_completed
+# Seperate signals to update the hud
+signal update_description(text)
+signal update_title(text)
 
+# I havent found a use for these yet but might be useful
+signal objective_started
+signal objective_completed
 
 enum States {Running,NotRunning,Completed,Done}
 var objectives = []
@@ -10,6 +14,8 @@ var current_index : int = 0
 var current_objective : Objective
 
 func add_objective(obj : Objective):
+	# might aswell set the system in the object here
+	obj.system = self
 	objectives.append(obj)
 
 func update() -> void:
@@ -20,7 +26,8 @@ func update() -> void:
 	match current_objective.Status:
 		
 		States.NotRunning:
-			emit_signal("objective_started",current_objective.Name,current_objective.Discription)
+			#emit_signal("objective_started",current_objective.Name,current_objective.Discription)
+			emit_signal("objective_started")
 			current_objective.start_objective()
 			current_objective.Status = States.Running
 			
